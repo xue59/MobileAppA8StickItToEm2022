@@ -13,16 +13,19 @@ public class AUserAdapter extends RecyclerView.Adapter<AUserViewHolder> {
 
     List<User> listOfUsers;
     Context context;
+    User logined_user;
 
-    public AUserAdapter(List<User> listOfUsers, Context context){
+    public AUserAdapter(List<User> listOfUsers, Context context, User logined_user){
         this.listOfUsers = listOfUsers;
+        this.logined_user = logined_user;
         this.context = context;
+
     }
 
     @Override
     @NonNull
     public  AUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        return new AUserViewHolder(LayoutInflater.from(context).inflate(R.layout.a_user_view_holder, parent, false), context);
+        return new AUserViewHolder(LayoutInflater.from(context).inflate(R.layout.a_user_view_holder, parent, false), context, this.logined_user);
     }
 
     @Override

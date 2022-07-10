@@ -1,13 +1,11 @@
 package edu.neu.madscourse.a8stickittoem;
 
-public class User {
+import java.io.Serializable;
 
-    public String username;
-    public String userID;
+public class User implements Serializable {
 
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
+    String username;
+    String userID;
 
     public User(String userID, String username) {
         this.username = username;
