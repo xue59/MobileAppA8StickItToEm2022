@@ -11,8 +11,8 @@ import java.util.List;
 
 public class AUserAdapter extends RecyclerView.Adapter<AUserViewHolder> {
 
-    private final List<User> listOfUsers;
-    private final Context context;
+    List<User> listOfUsers;
+    Context context;
 
     public AUserAdapter(List<User> listOfUsers, Context context){
         this.listOfUsers = listOfUsers;
@@ -29,6 +29,13 @@ public class AUserAdapter extends RecyclerView.Adapter<AUserViewHolder> {
     public void onBindViewHolder(@NonNull AUserViewHolder holder, int position){
         holder.bindUserNameUserID(listOfUsers.get(position));
     }
+
+    public void updateList(List<User> newList) {
+        this.listOfUsers = newList;
+        this.notifyDataSetChanged();
+    }
+
+
     @Override
     public int getItemCount(){
         return listOfUsers.size();
