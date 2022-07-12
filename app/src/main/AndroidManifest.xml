@@ -14,6 +14,9 @@
         android:theme="@style/Theme.A8StickItToEm"
         tools:targetApi="31">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".loginSuccessActivity"
             android:exported="false" />
         <activity

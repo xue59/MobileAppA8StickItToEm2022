@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-anydpi/ic_send.xml" value="0.1165" />
+        <entry key="app/src/main/res/drawable/ic_send_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_smile.xml" value="0.1165" />
         <entry key="app/src/main/res/layout/a_user_view_holder.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_login_success.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/activity_send_sticker.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/layout/emoji_item.xml" value="0.16" />
         <entry key="app/src/main/res/layout/message.xml" value="0.2557291666666667" />
       </map>
     </option>
@@ -17,5 +23,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
   </component>
 </project>

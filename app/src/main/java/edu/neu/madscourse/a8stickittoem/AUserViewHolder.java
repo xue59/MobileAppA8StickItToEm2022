@@ -1,6 +1,7 @@
 package edu.neu.madscourse.a8stickittoem;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,10 +34,11 @@ public class AUserViewHolder extends RecyclerView.ViewHolder {
                 Log.i("Go to Chat: ", "clicked " + logined_user.getUsername()+"_"+aUser.getUsername());
                 Toast.makeText(context.getApplicationContext(), "Jump to chat " + logined_user.getUsername()+"_"+aUser.getUsername(), Toast.LENGTH_LONG)
                         .show();
-                // new intent
-                // putextra(sender, receiver)
-                // startactivity(messageActivity.class)
 
+                // Start new chat activity
+                final Intent intent = new Intent(v.getContext(), ChatActivity.class);
+                intent.putExtra("chatID", logined_user.getUsername() + "_" + aUser.getUsername());
+                v.getContext().startActivity(intent);
             }
         });
     }
