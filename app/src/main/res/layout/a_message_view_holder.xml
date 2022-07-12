@@ -20,8 +20,8 @@
 
             <TextView
                 android:id="@+id/userName"
-                android:layout_width="102dp"
-                android:layout_height="26dp"
+                android:layout_width="121dp"
+                android:layout_height="24dp"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.142"
-                tools:text="user Name" />
+                tools:text="SenderName" />
 
             <TextView
                 android:id="@+id/msgTime"
@@ -40,7 +40,7 @@
                 android:textColor="@color/purple_700"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.219"
+                app:layout_constraintHorizontal_bias="0.138"
                 app:layout_constraintStart_toEndOf="@+id/userName"
                 app:layout_constraintTop_toTopOf="@+id/userName"
                 tools:text="MsgTime" />

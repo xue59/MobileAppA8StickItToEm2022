@@ -25,7 +25,9 @@ public class AMessageViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindSenderMsgTimeMsgText(Message tobeBindedAMessage){
-        userNameSenderTV.setText(tobeBindedAMessage);
+        userNameSenderTV.setText(tobeBindedAMessage.getSenderUserName());
+        msgTimeTV.setText(tobeBindedAMessage.getMsgTime());
+
     }
 
 

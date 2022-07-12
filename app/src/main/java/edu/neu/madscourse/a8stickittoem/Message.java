@@ -1,18 +1,21 @@
 package edu.neu.madscourse.a8stickittoem;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 //create model to store the a message in the firebase real-msgTime database
 public class Message{
     private String senderUserName;
-    private long msgTime;
+    private String msgTime;
     private String msgText;
 
     public Message(String senderUserName, String msgText) {
        this.msgText=msgText;
        this.senderUserName=senderUserName;
-       this.msgTime=new Date().getTime();
+       String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+       this.msgTime= timeStamp;
+
     }
 
 
@@ -26,7 +29,10 @@ public class Message{
     }
 
     public long getMsgTime() {
-        return msgTime;
+        return (toString(msgTime));
+    }
+
+    private long toString(long msgTime) {
     }
 
 }
