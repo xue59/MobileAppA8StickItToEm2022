@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Message {
 
-    private String messageText;
+    private String stickerID;
     private String messageUser;
     private long messageTime;
 
     public Message(String messageText, String messageUser) {
-        this.messageText = messageText;
+        this.stickerID = messageText;
         this.messageUser = messageUser;
 
         // Initialize to current time
@@ -21,11 +21,11 @@ public class Message {
     }
 
     public String getMessageText() {
-        return messageText;
+        return stickerID;
     }
 
     public void setMessageText(String messageText) {
-        this.messageText = messageText;
+        this.stickerID = messageText;
     }
 
     public String getMessageUser() {
