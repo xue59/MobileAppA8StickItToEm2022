@@ -20,23 +20,13 @@ public class Message{
         return msgText;
     }
 
-    public void getmsgText(String msgText) {
-        this ;
-    }
 
     public String getSenderUserName() {
         return senderUserName;
-    }
-
-    public void setUser(String senderUserName) {
-        this.senderUserName=senderUserName;
     }
 
     public long getMsgTime() {
         return msgTime;
     }
 
-    public void msgTime(long msgTime) {
-        this.msgTime = msgTime;
-    }
 }
