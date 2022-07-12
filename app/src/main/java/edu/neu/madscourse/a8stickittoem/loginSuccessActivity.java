@@ -111,9 +111,6 @@ public class loginSuccessActivity extends AppCompatActivity{
                 }
         );
 
-        //用于展示 recycle view
-
-
 
     }
 

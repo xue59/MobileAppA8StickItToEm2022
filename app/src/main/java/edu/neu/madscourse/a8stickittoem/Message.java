@@ -18,11 +18,9 @@ public class Message{
 
     }
 
-
     public String getMsgText() {
         return msgText;
     }
-
 
     public String getSenderUserName() {
         return senderUserName;
@@ -31,7 +29,5 @@ public class Message{
     public String getMsgTime() {
         return msgTime;
     }
-
-
 
 }
