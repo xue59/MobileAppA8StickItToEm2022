@@ -1,36 +1,46 @@
 package edu.neu.madscourse.a8stickittoem;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Message {
 
-    public LocalDateTime myDT;
-    public String emojiID;
-    public User sender;
-    public User receiver;
+    private String messageText;
+    private String messageUser;
+    private long messageTime;
 
-    public Message() {}
+    public Message(String messageText, String messageUser) {
+        this.messageText = messageText;
+        this.messageUser = messageUser;
 
-    public Message(LocalDateTime myDT, String emojiID, User sender, User receiver) {
-        this.myDT = myDT;
-        this.emojiID = emojiID;
-        this.sender = sender;
-        this.receiver = receiver;
+        // Initialize to current time
+        messageTime = new Date().getTime();
     }
 
-    public LocalDateTime getMyDT() {
-        return myDT;
+    public Message() {
+
     }
 
-    public String getEmojiID() {
-        return emojiID;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public User getSender() {
-        return sender;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public String getMessageUser() {
+        return messageUser;
+    }
+
+    public void setMessageUser(String messageUser) {
+        this.messageUser = messageUser;
+    }
+
+    public long getMessageTime() {
+        return messageTime;
+    }
+
+    public void setMessageTime(long messageTime) {
+        this.messageTime = messageTime;
     }
 }
