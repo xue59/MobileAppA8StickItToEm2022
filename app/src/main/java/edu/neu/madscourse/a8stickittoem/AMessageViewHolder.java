@@ -1,6 +1,7 @@
 package edu.neu.madscourse.a8stickittoem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AMessageViewHolder extends RecyclerView.ViewHolder {
 //    public User aUser;
-    Message aMessage; // this is a message， one message includes： senderUserName； msgText； msgTime
+    public Message aMessage; // this is a message， one message includes： senderUserName； msgText； msgTime
     public TextView userNameSenderTV, msgTimeTV, msgTextTV;
     public User logined_user;
     private Context context;
@@ -26,7 +27,12 @@ public class AMessageViewHolder extends RecyclerView.ViewHolder {
 
     public void bindSenderMsgTimeMsgText(Message tobeBindedAMessage){
         userNameSenderTV.setText(tobeBindedAMessage.getSenderUserName());
+        Log.d("userNameSenderTV: ", tobeBindedAMessage.getSenderUserName());
         msgTimeTV.setText(tobeBindedAMessage.getMsgTime());
+        Log.d("msgTimeTV: ", tobeBindedAMessage.getMsgTime());
+        msgTextTV.setText(tobeBindedAMessage.getMsgText());
+        Log.d("Text content: ", tobeBindedAMessage.getMsgText());
+
         aMessage = tobeBindedAMessage;
     }
 

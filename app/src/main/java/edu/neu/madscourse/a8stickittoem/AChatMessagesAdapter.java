@@ -1,6 +1,7 @@
 package edu.neu.madscourse.a8stickittoem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -18,6 +19,8 @@ public class AChatMessagesAdapter extends RecyclerView.Adapter<AMessageViewHolde
 
     public AChatMessagesAdapter(List<Message> listOfMessages, ChatActivity context, User logined_user) {
         this.listOfMessages = listOfMessages;
+        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(1).getSenderUserName() + listOfMessages.get(1).getMsgTime() + listOfMessages.get(1).getMsgText());
+        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(2).getSenderUserName() + listOfMessages.get(2).getMsgTime() + listOfMessages.get(2).getMsgText());
         this.logined_user   = logined_user;
         this.context = context;
     }
@@ -30,7 +33,7 @@ public class AChatMessagesAdapter extends RecyclerView.Adapter<AMessageViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull AMessageViewHolder holder, int position) {
-
+        holder.bindSenderMsgTimeMsgText(listOfMessages.get(position));
     }
 
     public void updateMessagesList(List<Message> newList) {

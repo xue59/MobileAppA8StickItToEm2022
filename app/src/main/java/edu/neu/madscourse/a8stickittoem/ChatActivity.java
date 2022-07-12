@@ -65,17 +65,17 @@ public class ChatActivity extends AppCompatActivity {
                 .show();
         listOfMessages = new ArrayList<>(); // when creating message: public Message(String senderUserName, String msgText)
         listOfMessages.add(new Message("Wang", "Hello from Wang"));
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } // set sleep 1s
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } // set sleep 1s
         listOfMessages.add(new Message("Zack", "Hello from Zack"));
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } // set sleep 1s
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } // set sleep 1s
         listOfMessages.add(new Message("Wang", "How R U from Wang"));
 
         messagesRecyclerView = findViewById(R.id.chat_messages_recycle_view);

@@ -7,14 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -23,11 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.io.Externalizable;
-import java.io.Serializable;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +47,7 @@ public class loginSuccessActivity extends AppCompatActivity{
 //        listOfUsers.add(new User("userID456", "userNameVictor"));
 //        listOfUsers.add(new User("userID789", "userNameMike"));
 
-        usersRecycleView = findViewById(R.id.all_users_recycle_view);
+        usersRecycleView = findViewById(R.id.chat_messages_recycle_view);
         usersRecycleView.setHasFixedSize(true);
         usersRecycleView.setLayoutManager(new LinearLayoutManager(this));
 //        usersRecycleView.setAdapter(new AUserAdapter(listOfUsers, loginSuccessActivity.this));
