@@ -28,11 +28,10 @@ public class Message{
         return senderUserName;
     }
 
-    public long getMsgTime() {
-        return (toString(msgTime));
+    public String getMsgTime() {
+        return msgTime;
     }
 
-    private long toString(long msgTime) {
-    }
+
 
 }
