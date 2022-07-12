@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MessageActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
     private FirebaseListAdapter<Message> adapter;
     private DatabaseReference mRootRef;
 

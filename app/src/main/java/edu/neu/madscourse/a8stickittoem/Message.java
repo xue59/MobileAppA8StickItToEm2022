@@ -2,45 +2,43 @@ package edu.neu.madscourse.a8stickittoem;
 
 import java.util.Date;
 
-public class Message {
 
+//create model to store the chat in the firebase real-time database
+public class Message{
+    private String user;
+    private long time;
     private String stickerID;
-    private String messageUser;
-    private long messageTime;
 
-    public Message(String messageText, String messageUser) {
-        this.stickerID = messageText;
-        this.messageUser = messageUser;
-
-        // Initialize to current time
-        messageTime = new Date().getTime();
+    public Message(String stickerID, String user) {
+       this.stickerID=stickerID;
+       this.user=user;
+       time=new Date().getTime();
     }
 
     public Message() {
-
     }
 
-    public String getMessageText() {
+    public String getStickerID() {
         return stickerID;
     }
 
-    public void setMessageText(String messageText) {
-        this.stickerID = messageText;
+    public void setStickerID(String stickerID) {
+        this.stickerID=stickerID;
     }
 
-    public String getMessageUser() {
-        return messageUser;
+    public String getUser() {
+        return user;
     }
 
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
+    public void setUser(String user) {
+        this.user=user;
     }
 
-    public long getMessageTime() {
-        return messageTime;
+    public long getTime() {
+        return time;
     }
 
-    public void setMessageTime(long messageTime) {
-        this.messageTime = messageTime;
+    public void setTime(long time) {
+        this.time = time;
     }
 }
