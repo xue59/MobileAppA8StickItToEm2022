@@ -1,8 +1,11 @@
 package edu.neu.madscourse.a8stickittoem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.GridView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -19,7 +22,10 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        ActionBar actionBar = getSupportActionBar(); // calling the go back bar
+        actionBar.setDisplayHomeAsUpEnabled(true); // showing the go back bar
 
+        //staring code here 开始这里coding
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
         String chatID = getIntent().getStringExtra("chatID"); // Retrieve chatID
 
@@ -71,5 +77,16 @@ public class ChatActivity extends AppCompatActivity {
 
         listOfMessages.setAdapter(adapter);
      */
+    }
+
+    //后退按键
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
