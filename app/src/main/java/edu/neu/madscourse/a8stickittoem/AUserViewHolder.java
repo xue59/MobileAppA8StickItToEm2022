@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AUserViewHolder extends RecyclerView.ViewHolder {
-    public User aUser;
+    public User aUser;  // 表示被选中click 的对话用户， the selected chatting user
     public TextView userNameTV, userIDTV;
     public Button btnChat;
     public User logined_user;
@@ -23,7 +23,7 @@ public class AUserViewHolder extends RecyclerView.ViewHolder {
     public AUserViewHolder(@NonNull View itemView, Context context, User logined_user){
         super(itemView);
         this.userNameTV = itemView.findViewById(R.id.userName);
-        this.userIDTV   = itemView.findViewById(R.id.userID);
+        this.userIDTV   = itemView.findViewById(R.id.msgTime);
         this.context  = context;
         this.logined_user = logined_user;
         btnChat = itemView.findViewById(R.id.btnChat);

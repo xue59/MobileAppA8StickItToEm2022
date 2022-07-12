@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.GridView;
 
@@ -28,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
         //staring code here 开始这里coding
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
         String chatID = getIntent().getStringExtra("chatID"); // Retrieve chatID
-
+        Log.d("Chating with: ", chatID);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         /*
         fab.setOnClickListener(new View.OnClickListener() {
