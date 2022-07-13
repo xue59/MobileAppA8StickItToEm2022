@@ -13,10 +13,16 @@ public class GridAdaptor extends BaseAdapter {
     Context context;
     int[] image;
     LayoutInflater inflater;
+    private int selectedPosition = -1;
 
     public GridAdaptor(Context context, int[] image) {
         this.context = context;
         this.image = image;
+    }
+
+    public void setSelectedPosition(int position)
+    {
+        selectedPosition = position;
     }
 
     @Override
@@ -46,13 +52,13 @@ public class GridAdaptor extends BaseAdapter {
 
         ImageView imageView = convertView.findViewById(R.id.grid_image);
         imageView.setImageResource(image[position]);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Set background color to grey once chosen
-                imageView.setBackgroundColor(Color.parseColor("#808080"));
-            }
-        });
+
+        // First check to see if the item has already been selected or not
+        if(position == selectedPosition) {
+            imageView.setBackgroundColor(Color.parseColor("#808080"));
+        } else {
+            imageView.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         return convertView;
     }

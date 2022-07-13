@@ -1,6 +1,7 @@
 package edu.neu.madscourse.a8stickittoem;
 
-import java.text.SimpleDateFormat;
+import android.text.format.DateFormat;
+
 import java.util.Date;
 
 
@@ -10,14 +11,11 @@ public class Message{
     private String msgTime;
     private String msgText;
 
-    public Message(String senderUserName, String msgText) {
-       this.msgText=msgText;
-       this.senderUserName=senderUserName;
-       String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
-       this.msgTime= timeStamp;
-
+    public Message(String senderUserName, String msgText, String msgTime) {
+       this.msgText = msgText;
+       this.senderUserName = senderUserName;
+       this.msgTime = msgTime;
     }
-
 
     public String getMsgText() {
         return msgText;

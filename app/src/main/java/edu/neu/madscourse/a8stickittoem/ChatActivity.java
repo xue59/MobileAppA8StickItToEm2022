@@ -5,19 +5,25 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ChatActivity extends AppCompatActivity {
 
-    private FirebaseListAdapter<Message> adapter; // Using firebaseUI library function
     private DatabaseReference mRootRef;
+    private int selectedPosition;
+    private String chatID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,61 +32,37 @@ public class ChatActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar(); // calling the go back bar
         actionBar.setDisplayHomeAsUpEnabled(true); // showing the go back bar
 
-        //staring code here 开始这里coding
+        //staring code here
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
-        String chatID = getIntent().getStringExtra("chatID"); // Retrieve chatID
+        chatID = getIntent().getStringExtra("chatID"); // Retrieve chatID
+
         Log.d("Chating with: ", chatID);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
-        /*
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new Message(stickerID, username)
-                        );
+                pushToDb();
             }
         });
-        */
 
         int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
                 R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
         GridAdaptor gridAdaptor = new GridAdaptor(this, images);
         GridView gv = findViewById(R.id.grid_sticker);
         gv.setAdapter(gridAdaptor);
-    }
-
-    public void displayMessage() {
-        /*
-        ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
-
-        adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.message, mRootRef) {
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            protected void populateView(View v, Message model, int position) {
-                // Get references to the views of message.xml
-                TextView messageText = (TextView)v.findViewById(R.id.message_text);
-                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-
-                // Set their text
-                messageText.setText(model.getMessageText());
-                messageUser.setText(model.getMessageUser());
-
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMessageTime()));
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                gridAdaptor.setSelectedPosition(position);
+                selectedPosition = position;
+                gridAdaptor.notifyDataSetChanged();
             }
-        };
-
-        listOfMessages.setAdapter(adapter);
-     */
+        });
     }
 
-    //后退按键
+
+    // Backup button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -89,5 +71,16 @@ public class ChatActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // Push message to database
+    public void pushToDb() {
+
+        // Using timestamp as key
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.fff").format(new java.util.Date());
+        DatabaseReference messageRef = mRootRef.child("chatHistory").child(chatID).child(timeStamp).getRef();
+        String senderUserName = chat;
+        String msgTime = DateFormat.format("MM-dd-yyyy HH:mm", new Date().getTime()).toString();
+        messageRef.setValue(new Message())
     }
 }
