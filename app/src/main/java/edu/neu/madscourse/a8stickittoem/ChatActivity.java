@@ -84,7 +84,7 @@ public class ChatActivity extends AppCompatActivity {
     public void pushToDb() {
 
         // Using timestamp as key
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()).replace(".", "");
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new java.util.Date()).replace(".", "");
         DatabaseReference messageRef = mRootRef.child("chatHistory").child(chatID).child(timeStamp).getRef();
         String senderUserName = logined_user.getUsername();
         String msgText = String.valueOf(images[selectedPosition]);
