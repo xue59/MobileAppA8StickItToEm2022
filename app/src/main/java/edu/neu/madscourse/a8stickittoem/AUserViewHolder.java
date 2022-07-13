@@ -34,8 +34,8 @@ public class AUserViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Log.i("Go to Chat: ", "clicked " + logined_user.getUsername()+"_"+aUser.getUsername());
-                Toast.makeText(context.getApplicationContext(), "Jump to chat " + logined_user.getUsername()+"_"+aUser.getUsername(), Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(context.getApplicationContext(), "Jump to chat " + logined_user.getUsername()+"_"+aUser.getUsername(), Toast.LENGTH_SHORT)
+//                        .show();
 
                 // Start new chat activity
                 final Intent intent = new Intent(v.getContext(), ChatActivity.class);

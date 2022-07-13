@@ -3,6 +3,7 @@ package edu.neu.madscourse.a8stickittoem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +37,9 @@ public class ChatActivity extends AppCompatActivity {
     public final int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
             R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
     public String chatID;
+    public List<Message> listOfMessages;
+    public RecyclerView messagesRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,18 @@ public class ChatActivity extends AppCompatActivity {
         chating_with = getIntent().getStringExtra("chating_with"); // Retrieve chatID
         logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
         checkChatID(mRootRef);
+        Toast.makeText(getApplicationContext(), "Chatting with " + chating_with, Toast.LENGTH_LONG)
+                .show();
+
+        listOfMessages = new ArrayList<>();
+        listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
+        listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time333"));
+
+        messagesRecyclerView = findViewById(R.id.chat_messages_recycle_view);
+        messagesRecyclerView.setHasFixedSize(true);
+        messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
