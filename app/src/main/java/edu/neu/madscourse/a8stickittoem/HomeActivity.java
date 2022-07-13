@@ -10,9 +10,11 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_success);
+        ActionBar actionBar = getSupportActionBar(); // calling the go back bar
+        actionBar.setDisplayHomeAsUpEnabled(true); // showing the go back bar
         recyclerView = findViewById(R.id.all_users_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(this,list);
@@ -57,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         getUser();
         checkNotice();
     }
+
 
     boolean isFirst;
     private void checkNotice() {
@@ -139,4 +144,16 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    //Back arrow button 后退按键
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

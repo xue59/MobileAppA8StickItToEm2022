@@ -3,11 +3,13 @@ package edu.neu.madscourse.a8stickittoem;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +38,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        ActionBar actionBar = getSupportActionBar(); // calling the go back bar
+        actionBar.setDisplayHomeAsUpEnabled(true); // showing the go back bar
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         toUser = getIntent().getStringExtra("toId");
         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
@@ -46,6 +51,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager mLinearLayout = new LinearLayoutManager(this);
         rvChat.setLayoutManager(mLinearLayout);
         rvChat.setAdapter(mAdapter);
+        rvChat.scrollToPosition(mAdapter.getItemCount());
 
 
         getData(sendUser, toUser);
@@ -69,6 +75,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         ic_star.setOnClickListener(this);
 
     }
+
 
     @Override
     public void onClick(View view) {
@@ -150,7 +157,16 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         databaseReference.child("MessageHistory").push().setValue(hashMap);
 
     }
-
+    //Back arrow button 后退按键
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
 
