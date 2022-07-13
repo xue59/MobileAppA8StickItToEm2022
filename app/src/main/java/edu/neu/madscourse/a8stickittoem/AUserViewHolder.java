@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +24,7 @@ public class AUserViewHolder extends RecyclerView.ViewHolder {
     public AUserViewHolder(@NonNull View itemView, Context context, User logined_user){
         super(itemView);
         this.userNameTV = itemView.findViewById(R.id.userName);
-        this.userIDTV   = itemView.findViewById(R.id.msgTime);
+        this.userIDTV   = itemView.findViewById(R.id.msgText);
         this.context  = context;
         this.logined_user = logined_user;
         btnChat = itemView.findViewById(R.id.btnChat);

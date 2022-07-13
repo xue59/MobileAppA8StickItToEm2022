@@ -1,6 +1,7 @@
 package edu.neu.madscourse.a8stickittoem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.GridView;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,39 +55,70 @@ public class ChatActivity extends AppCompatActivity {
         logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
         checkChatID(logined_user,chating_with);
         listOfMessages = new ArrayList<>();
-        listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
-        listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time444"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time555"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time666"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time777"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time888"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+//        listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
+//        listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time444"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time555"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time666"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time777"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time888"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+//        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
 
         messagesRecyclerView = findViewById(R.id.chat_messages_recycle_view);
         messagesRecyclerView.setHasFixedSize(true);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
-        Log.d("Check_chatID line72: ", ""+chatID);
+//        Log.d("Check_chatID line72: ", ""+chatID);
 
-//        mRootRef.child("chatHistory").addValueEventListener(
-//                new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//////                        Log.d("chat history print", snapshot.getValue());
-////                        Message a_message = snapshot.child("20220712224258").getValue(Message.class);
-////                        Log.d("chat history print", a_message.getMsgText());
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                }
-//        );
+        mRootRef.child("chatHistory").child("Mike_Victor").addChildEventListener(
+                new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                        Message a_message = snapshot.child("20220712225956").getValue(Message.class);
+                        String key = snapshot.getKey();
+                        String senderUserName = snapshot.child("senderUserName").getValue().toString();
+                        String msgText = snapshot.child("msgText").getValue().toString();
+                        String msgTime = snapshot.child("msgTime").getValue().toString();
+                        Log.d("Added print chathistory Mike_Victor: ", senderUserName + msgText + msgTime);
+                        listOfMessages.add(new Message(senderUserName, msgText, msgTime));
+                        messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
+//                        messagesRecyclerView.smoothScrollToPosition(listOfMessages.size()-1);
+
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        String key = snapshot.getKey();
+                        String senderUserName = snapshot.child("senderUserName").getValue().toString();
+                        String msgText = snapshot.child("msgText").getValue().toString();
+                        String msgTime = snapshot.child("msgTime").getValue().toString();
+                        Log.d("Added print chathistory Mike_Victor: ", senderUserName + msgText + msgTime);
+                        listOfMessages.add(new Message(senderUserName, msgText, msgTime));
+                        messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
+//                        messagesRecyclerView.smoothScrollToPosition(listOfMessages.size()-1);
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+
 
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);

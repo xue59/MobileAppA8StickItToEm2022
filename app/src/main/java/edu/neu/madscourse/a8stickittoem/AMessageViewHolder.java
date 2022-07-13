@@ -3,9 +3,8 @@
 package edu.neu.madscourse.a8stickittoem;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AMessageViewHolder extends RecyclerView.ViewHolder {
     //    public User aUser;
     public Message aMessage; // this is a message， one message includes： senderUserName； msgText； msgTime
-    public TextView userNameSenderTV, msgTimeTV, msgTextTV;
+    public TextView userNameSenderTV, msgTimeTV;
+    public ImageView imageView;
     public User logined_user;
     private Context context;
 
@@ -24,14 +24,13 @@ public class AMessageViewHolder extends RecyclerView.ViewHolder {
         this.logined_user = logined_user;
         this.userNameSenderTV = itemView.findViewById(R.id.userName);
         this.msgTimeTV = itemView.findViewById(R.id.msgTime);
-        this.msgTextTV = itemView.findViewById(R.id.msgText);
+        this.imageView = itemView.findViewById(R.id.msgText);
     }
 
     public void bindSenderMsgTimeMsgText(Message tobeBindedAMessage){
-        userNameSenderTV.setText(tobeBindedAMessage.getSenderUserName());
+        userNameSenderTV.setText(tobeBindedAMessage.getSenderUserName() + ": ");
         msgTimeTV.setText(tobeBindedAMessage.getMsgTime());
-        msgTextTV.setText(tobeBindedAMessage.getMsgText());
-
+        imageView.setImageResource( Integer.parseInt(tobeBindedAMessage.getMsgText()) );
         aMessage = tobeBindedAMessage;
     }
 
