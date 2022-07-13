@@ -12,21 +12,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        android:layout_marginTop="20dp"
+       />
 
     <TextView
         android:id="@+id/txt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Login to send sticker to your friend!"
+        android:text="Login to send sticker to your friend! \n TA login: TA or Tony"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +41,6 @@
         android:maxLength="10"
         android:textColorHint="#8E8787"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_login" />
 
@@ -53,7 +51,6 @@
         android:layout_marginTop="48dp"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxt_login" />
 
