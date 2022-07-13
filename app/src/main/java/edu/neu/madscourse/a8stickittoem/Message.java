@@ -10,11 +10,12 @@ public class Message{
     private String msgTime;
     private String msgText;
 
-    public Message(String senderUserName, String msgText) {
+    public Message(String senderUserName, String msgText, String msgTime) {
        this.msgText=msgText;
        this.senderUserName=senderUserName;
-       String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
-       this.msgTime= timeStamp;
+       this.msgTime = msgTime;
+//       String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+//       this.msgTime= timeStamp;
 
     }
 

@@ -19,8 +19,8 @@ public class AChatMessagesAdapter extends RecyclerView.Adapter<AMessageViewHolde
 
     public AChatMessagesAdapter(List<Message> listOfMessages, ChatActivity context, User logined_user) {
         this.listOfMessages = listOfMessages;
-        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(1).getSenderUserName() + listOfMessages.get(1).getMsgTime() + listOfMessages.get(1).getMsgText());
-        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(2).getSenderUserName() + listOfMessages.get(2).getMsgTime() + listOfMessages.get(2).getMsgText());
+//        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(1).getSenderUserName() + listOfMessages.get(1).getMsgTime() + listOfMessages.get(1).getMsgText());
+//        Log.d("AChatMessagesAdapter listMessages: ", listOfMessages.get(2).getSenderUserName() + listOfMessages.get(2).getMsgTime() + listOfMessages.get(2).getMsgText());
         this.logined_user   = logined_user;
         this.context = context;
     }

@@ -35,10 +35,9 @@ public class AUserViewHolder extends RecyclerView.ViewHolder {
                 Log.i("Go to Chat: ", "clicked " + logined_user.getUsername()+"_"+aUser.getUsername());
 //                Toast.makeText(context.getApplicationContext(), "Jump to chat " + logined_user.getUsername()+"_"+aUser.getUsername(), Toast.LENGTH_LONG)
 //                        .show();
-
                 // Start new chat activity
                 final Intent intent = new Intent(v.getContext(), ChatActivity.class);
-                intent.putExtra("chatID", logined_user.getUsername() + "_" + aUser.getUsername());
+                intent.putExtra("chating_with", aUser.getUsername());
                 intent.putExtra("logined_user", (Serializable) logined_user);
                 v.getContext().startActivity(intent);
             }
