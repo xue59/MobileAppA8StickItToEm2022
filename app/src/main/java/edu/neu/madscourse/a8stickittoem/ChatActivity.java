@@ -51,7 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
         chating_with = getIntent().getStringExtra("chating_with"); // Retrieve chatID
         logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
-        chatID = checkChatID(logined_user,chating_with);
+        checkChatID(logined_user,chating_with);
         listOfMessages = new ArrayList<>();
         listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
         listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
@@ -69,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         messagesRecyclerView.setHasFixedSize(true);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
-        Log.d("Check_chatID: ", ""+chatID);
+        Log.d("Check_chatID line72: ", ""+chatID);
 
 //        mRootRef.child("chatHistory").addValueEventListener(
 //                new ValueEventListener() {
@@ -135,24 +135,23 @@ public class ChatActivity extends AppCompatActivity {
 
     //following function used to check if chatID exist in the database
     //otherwies creat a new chatID, storeChatID in ChatID
-    public static String checkChatID(User logined_user, String chating_with){
-        String chatID_loc = null;
+    public void checkChatID(User logined_user, String chating_with){
         mRootRef.child("chatHistory").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override  // used for determing which chatID exist in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("Try found chat_ID: ", logined_user.getUsername() +chating_with +" "+ snapshot.toString());
                 if (snapshot.hasChild(logined_user.getUsername() +"_"+chating_with)){
-                    String chatID_loc =  logined_user.getUsername() +"_"+chating_with;
+                    chatID =  logined_user.getUsername() +"_"+chating_with;
                 }else{
                     if(snapshot.hasChild(chating_with +"_"+ logined_user.getUsername())){
-                        String chatID_loc = chating_with +"_"+ logined_user.getUsername();
+                        chatID = chating_with +"_"+ logined_user.getUsername();
                     } else {
                         Log.d("Error no chat id found: ", "Creating New Chat_ID");
-                        String chatID_loc = logined_user.getUsername() +"_"+chating_with;;
-                        mRootRef.child("chatHistory").child(chatID_loc).setValue("");
+                        chatID = logined_user.getUsername() +"_"+chating_with;;
+                        mRootRef.child("chatHistory").child(chatID).setValue("");
                     }
                 }
-                Log.d("Found chat ID: ", chatID_loc);
+//                Log.d("Found chat ID: ", ""+chatID_loc);
 //                return chatID;
             }
 
@@ -160,7 +159,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return chatID_loc;
+//        return chatID_loc;
     }
 
 }
