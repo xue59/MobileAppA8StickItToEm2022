@@ -59,7 +59,15 @@ public class ChatActivity extends AppCompatActivity {
         listOfMessages = new ArrayList<>();
         listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
         listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
-        listOfMessages.add(new Message("Wang", "How R U from Wang", "time333"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time444"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time555"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time666"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time777"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time888"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
+        listOfMessages.add(new Message("Wang", "How R U from Wang", "time999"));
 
         messagesRecyclerView = findViewById(R.id.chat_messages_recycle_view);
         messagesRecyclerView.setHasFixedSize(true);
