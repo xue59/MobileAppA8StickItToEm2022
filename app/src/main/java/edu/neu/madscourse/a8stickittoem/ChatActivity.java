@@ -3,9 +3,11 @@ package edu.neu.madscourse.a8stickittoem;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +36,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private ChatAdapter mAdapter;
     private RecyclerView rvChat;
 
+    public int      smile_count,    kiss_count,     think_count,    wink_count,     expressionless_count,   star_count;
+    public TextView smile_count_tv, kiss_count_tv,  think_count_tv, wink_count_tv,  expressionless_count_tv,star_count_tv;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +51,18 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
         sendUser =  sp.getString("name","");
         rvChat =  findViewById(R.id.rv_chat);
-
         mAdapter = new ChatAdapter(this, list);
         LinearLayoutManager mLinearLayout = new LinearLayoutManager(this);
         rvChat.setLayoutManager(mLinearLayout);
         rvChat.setAdapter(mAdapter);
-        rvChat.scrollToPosition(mAdapter.getItemCount());
 
+        // set find text view for the sticker used count
+        smile_count_tv = findViewById(R.id.smile_count);
+        kiss_count_tv  = findViewById(R.id.kiss_count);
+        think_count_tv = findViewById(R.id.think_count);
+        wink_count_tv  = findViewById(R.id.wink_count);
+        expressionless_count_tv = findViewById(R.id.expressionless_count);
+        star_count_tv  = findViewById(R.id.star_count);
 
         getData(sendUser, toUser);
         findViewById(R.id.iv_send).setOnClickListener(new View.OnClickListener() {
@@ -126,16 +136,30 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
+                smile_count =0;
+                kiss_count  =0;
+                think_count =0;
+                wink_count  =0;
+                expressionless_count =0;
+                star_count = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Message chat = snapshot.getValue(Message.class);
+                    upDateStickerCount(chat,sendUser); // call update stickerCount function to compare & update the counts
                     if(chat.getSendName().equals(fromId) && chat.getToName().equals(toId) ||
                             chat.getSendName().equals(toId) && chat.getToName().equals(fromId)){
                         list.add(chat);
                     }
-
-
                 }
+                smile_count_tv.setText("Smile: " + smile_count);
+                kiss_count_tv.setText("Kiss: " + kiss_count);
+                think_count_tv.setText("Think: " + think_count);
+
+                wink_count_tv.setText("Wink: " + wink_count);
+                expressionless_count_tv.setText("Exp.less: " + expressionless_count);
+                star_count_tv.setText("Star: " + star_count);
+
                 mAdapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -144,6 +168,33 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    public void upDateStickerCount(Message chat, String sendUser){
+        if (chat.getSendName().equals(sendUser)){
+            switch (chat.getImgId()){
+                case "smile":
+                    smile_count ++;
+                    break;
+                case "kiss":
+                    kiss_count++;
+                    break;
+                case "think":
+                    think_count++;
+                    break;
+                case "wink":
+                    wink_count++;
+                    break;
+                case "expressionless":
+                    expressionless_count++;
+                    break;
+                case "star" :
+                    star_count++;
+                    break;
+                default: Log.d(" upDateStickerCount Error: ", "No Match stickers imageID!!!!");
+            }
+        }
+    }
+
     private void sendText(String msg) {
         if (TextUtils.isEmpty(msg)){
             return;

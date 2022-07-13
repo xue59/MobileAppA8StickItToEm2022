@@ -23,57 +23,128 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="80dp">
+
             <ImageView
                 android:id="@+id/ic_smile"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_smile"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_smile" />
+
             <ImageView
                 android:id="@+id/ic_kiss"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_kiss"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_kiss" />
+
             <ImageView
                 android:id="@+id/ic_think"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_think"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_think" />
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/smile_count"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="smile_count"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/kiss_count"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="kiss_count"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/think_count"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="think_count"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
             <ImageView
                 android:id="@+id/ic_wink"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_wink"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_wink" />
+
             <ImageView
                 android:id="@+id/ic_expressionless"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_expressionless"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_expressionless" />
+
             <ImageView
                 android:id="@+id/ic_star"
-                android:layout_margin="10dp"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_star"/>
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_star" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wink_count"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="wink_count"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/expressionless_count"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="expressionless_count"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/star_count"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="star_count"
+                android:textAlignment="center" />
+        </LinearLayout>
+
     </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_send"
         app:layout_constraintEnd_toEndOf="parent"

@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
         userName =  sp.getString("name","");
+        Toast.makeText(getApplicationContext(), "Welcome, " + userName +"!", Toast.LENGTH_SHORT).show();
         getUser();
         checkNotice();
     }

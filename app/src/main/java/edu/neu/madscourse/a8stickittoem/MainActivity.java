@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                             sp.edit().putString("name",name).apply();
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                         }
-
                     }
                     loadingCircle.setVisibility(View.GONE);
                 }
