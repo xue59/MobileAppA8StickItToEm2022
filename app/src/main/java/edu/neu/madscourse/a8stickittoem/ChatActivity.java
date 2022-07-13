@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,12 +30,12 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     private int selectedPosition;
-    private DatabaseReference mRootRef;
+    private static DatabaseReference mRootRef;
     public User logined_user;
     public String chating_with;
     public final int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
             R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
-    public String chatID;
+    public java.lang.String chatID ;
     public List<Message> listOfMessages;
     public RecyclerView messagesRecyclerView;
 
@@ -52,10 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
         chating_with = getIntent().getStringExtra("chating_with"); // Retrieve chatID
         logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
-        checkChatID(mRootRef);
-        Toast.makeText(getApplicationContext(), "Chatting with " + chating_with, Toast.LENGTH_LONG)
-                .show();
-
+        chatID = checkChatID(logined_user,chating_with);
         listOfMessages = new ArrayList<>();
         listOfMessages.add(new Message("Wang", "Hello from Wang", "time111"));
         listOfMessages.add(new Message("Zack", "Hello from Zack", "time222"));
@@ -73,6 +69,24 @@ public class ChatActivity extends AppCompatActivity {
         messagesRecyclerView.setHasFixedSize(true);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messagesRecyclerView.setAdapter(new AChatMessagesAdapter(listOfMessages, ChatActivity.this, logined_user));
+        Log.d("Check_chatID: ", ""+chatID);
+
+//        mRootRef.child("chatHistory").addValueEventListener(
+//                new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//////                        Log.d("chat history print", snapshot.getValue());
+////                        Message a_message = snapshot.child("20220712224258").getValue(Message.class);
+////                        Log.d("chat history print", a_message.getMsgText());
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                }
+//        );
+
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,30 +135,32 @@ public class ChatActivity extends AppCompatActivity {
 
     //following function used to check if chatID exist in the database
     //otherwies creat a new chatID, storeChatID in ChatID
-    public void checkChatID(DatabaseReference mRootRef){
+    public static String checkChatID(User logined_user, String chating_with){
+        String chatID_loc = null;
         mRootRef.child("chatHistory").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override  // used for determing which chatID exist in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("Try found chat_ID: ", logined_user.getUsername() +chating_with +" "+ snapshot.toString());
                 if (snapshot.hasChild(logined_user.getUsername() +"_"+chating_with)){
-                    chatID = logined_user.getUsername() +"_"+chating_with;
+                    String chatID_loc =  logined_user.getUsername() +"_"+chating_with;
                 }else{
                     if(snapshot.hasChild(chating_with +"_"+ logined_user.getUsername())){
-                        chatID = chating_with +"_"+ logined_user.getUsername();
+                        String chatID_loc = chating_with +"_"+ logined_user.getUsername();
                     } else {
                         Log.d("Error no chat id found: ", "Creating New Chat_ID");
-                        chatID = logined_user.getUsername() +"_"+chating_with;;
-                        mRootRef.child("chatHistory").child(chatID).setValue("");
+                        String chatID_loc = logined_user.getUsername() +"_"+chating_with;;
+                        mRootRef.child("chatHistory").child(chatID_loc).setValue("");
                     }
                 }
-                Log.d("Found chat ID: ", chatID);
+                Log.d("Found chat ID: ", chatID_loc);
+//                return chatID;
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
+        return chatID_loc;
     }
 
 }
