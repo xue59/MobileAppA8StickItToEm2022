@@ -14,9 +14,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +32,7 @@ public class ChatActivity extends AppCompatActivity {
     public String chating_with;
     public final int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
             R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
-    String chatID;
+    public String chatID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
         chating_with = getIntent().getStringExtra("chating_with"); // Retrieve chatID
         logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
-        chatID = logined_user.getUsername() +"_"+chating_with;
+        checkChatID(mRootRef);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +90,34 @@ public class ChatActivity extends AppCompatActivity {
         String msgText = String.valueOf(images[selectedPosition]);
         String msgTime = DateFormat.format("MM-dd-yyyy HH:mm", new Date().getTime()).toString();
         messageRef.setValue(new Message(senderUserName, msgText, msgTime));
+    }
+
+    //following function used to check if chatID exist in the database
+    //otherwies creat a new chatID, storeChatID in ChatID
+    public void checkChatID(DatabaseReference mRootRef){
+        mRootRef.child("chatHistory").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override  // used for determing which chatID exist in the database
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("Try found chat_ID: ", logined_user.getUsername() +chating_with +" "+ snapshot.toString());
+                if (snapshot.hasChild(logined_user.getUsername() +"_"+chating_with)){
+                    chatID = logined_user.getUsername() +"_"+chating_with;
+                }else{
+                    if(snapshot.hasChild(chating_with +"_"+ logined_user.getUsername())){
+                        chatID = chating_with +"_"+ logined_user.getUsername();
+                    } else {
+                        Log.d("Error no chat id found: ", "Creating New Chat_ID");
+                        chatID = logined_user.getUsername() +"_"+chating_with;;
+                        mRootRef.child("chatHistory").child(chatID).setValue("");
+                    }
+                }
+                Log.d("Found chat ID: ", chatID);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
 
 }
