@@ -3,22 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/ic_expressionless.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_kiss.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_smile.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_star.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_think.xml" value="0.2565" />
-        <entry key="app/src/main/res/drawable/ic_wink.xml" value="0.2565" />
-        <entry key="app/src/main/res/layout/a_message_view_holder.xml" value="0.3528050740559896" />
-        <entry key="app/src/main/res/layout/a_user_view_holder.xml" value="0.26415913899739585" />
-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.24010416666666667" />
-        <entry key="app/src/main/res/layout/activity_login_success.xml" value="0.18333333333333332" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3728713989257813" />
-        <entry key="app/src/main/res/layout/activity_message_center.xml" value="0.37317810058593753" />
-        <entry key="app/src/main/res/layout/activity_send_sticker.xml" value="0.24121704101562502" />
-        <entry key="app/src/main/res/layout/emoji_item.xml" value="0.26614583333333336" />
-        <entry key="app/src/main/res/layout/message.xml" value="0.9464787801106771" />
+        <entry key="app/src/main/res/drawable/ic_send_black_24dp.xml" value="0.2635" />
+        <entry key="app/src/main/res/layout/a_message_view_holder.xml" value="0.12006079027355623" />
+        <entry key="app/src/main/res/layout/a_user_view_holder.xml" value="0.30104166666666665" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.24682971014492755" />
+        <entry key="app/src/main/res/layout/activity_login_success.xml" value="0.30104166666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18958333333333333" />
+        <entry key="app/src/main/res/layout/activity_message_center.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_send_sticker.xml" value="0.30158730158730157" />
+        <entry key="app/src/main/res/layout/item_sticker.xml" value="0.4119791666666667" />
       </map>
     </option>
   </component>
@@ -27,12 +20,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.3728713989257813" />
-      </ProjectState>
-    </option>
   </component>
 </project>
