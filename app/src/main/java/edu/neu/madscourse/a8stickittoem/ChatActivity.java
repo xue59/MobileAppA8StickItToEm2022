@@ -3,6 +3,7 @@ package edu.neu.madscourse.a8stickittoem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -13,17 +14,23 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private DatabaseReference mRootRef;
     private int selectedPosition;
-    private String chatID;
+    private DatabaseReference mRootRef;
+    public User logined_user;
+    public String chating_with;
+    public final int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
+            R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
+    String chatID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +41,11 @@ public class ChatActivity extends AppCompatActivity {
 
         //staring code here
         mRootRef = FirebaseDatabase.getInstance().getReference(); // Get root ref of database
-        chatID = getIntent().getStringExtra("chatID"); // Retrieve chatID
+        chating_with = getIntent().getStringExtra("chating_with"); // Retrieve chatID
+        logined_user = (User) getIntent().getSerializableExtra("logined_user"); // Retrieve logined user (username & uid)
+        chatID = logined_user.getUsername() +"_"+chating_with;
 
-        Log.d("Chating with: ", chatID);
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +53,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        int[] images = {R.drawable.ic_smile, R.drawable.ic_kiss, R.drawable.ic_think,
-                R.drawable.ic_wink, R.drawable.ic_expressionless, R.drawable.ic_star};
         GridAdaptor gridAdaptor = new GridAdaptor(this, images);
         GridView gv = findViewById(R.id.grid_sticker);
         gv.setAdapter(gridAdaptor);
@@ -77,10 +82,12 @@ public class ChatActivity extends AppCompatActivity {
     public void pushToDb() {
 
         // Using timestamp as key
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.fff").format(new java.util.Date());
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()).replace(".", "");
         DatabaseReference messageRef = mRootRef.child("chatHistory").child(chatID).child(timeStamp).getRef();
-        String senderUserName = chat;
+        String senderUserName = logined_user.getUsername();
+        String msgText = String.valueOf(images[selectedPosition]);
         String msgTime = DateFormat.format("MM-dd-yyyy HH:mm", new Date().getTime()).toString();
-        messageRef.setValue(new Message())
+        messageRef.setValue(new Message(senderUserName, msgText, msgTime));
     }
+
 }

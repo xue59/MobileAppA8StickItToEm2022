@@ -1,10 +1,5 @@
 package edu.neu.madscourse.a8stickittoem;
 
-import android.text.format.DateFormat;
-
-import java.util.Date;
-
-
 //create model to store the a message in the firebase real-msgTime database
 public class Message{
     private String senderUserName;
@@ -15,6 +10,10 @@ public class Message{
        this.msgText = msgText;
        this.senderUserName = senderUserName;
        this.msgTime = msgTime;
+    }
+
+    public Message() {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
     public String getMsgText() {

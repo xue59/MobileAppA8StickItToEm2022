@@ -47,7 +47,7 @@ public class loginSuccessActivity extends AppCompatActivity{
         //staring code here 开始这里coding
         logined_user = (User) getIntent().getSerializableExtra("logined_user");
         Log.d("logined_user", "" + logined_user.getUserID() + logined_user.getUsername());
-        Toast.makeText(getApplicationContext(), "Welcome " + logined_user.getUsername() + "(" + logined_user.getUserID() + ")", Toast.LENGTH_LONG)
+        Toast.makeText(getApplicationContext(), "Welcome " + logined_user.getUsername() + "(" + logined_user.getUserID() + ")", Toast.LENGTH_SHORT)
                 .show();
         listOfUsers = new ArrayList<>();
 
